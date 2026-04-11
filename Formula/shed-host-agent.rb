@@ -97,6 +97,6 @@ class ShedHostAgent < Formula
   end
 
   test do
-    assert_predicate bin/"shed-host-agent", :executable?
+    system bin/"shed-host-agent", "version"
   end
 end
