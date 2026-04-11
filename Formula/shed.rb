@@ -4,7 +4,9 @@ class Shed < Formula
   version "0.3.1"
   license "MIT"
 
-  depends_on "vfkit"
+  on_macos do
+    depends_on "vfkit"
+  end
 
   on_macos do
     on_arm do
