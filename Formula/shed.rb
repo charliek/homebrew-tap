@@ -60,41 +60,7 @@ class Shed < Formula
     end
 
     (etc/"shed").mkpath
-    unless (etc/"shed/server.yaml").exist?
-      (etc/"shed/server.yaml").write <<~YAML
-        # Shed Server Configuration
-        # Full reference: https://github.com/charliek/shed/blob/main/configs/server.example.yaml
-
-        # Server identity
-        name: my-server
-
-        # Network configuration
-        http_port: 8080
-        ssh_port: 2222
-
-        # Backend: vz (macOS), firecracker (Linux), or detect (auto)
-        default_backend: detect
-
-        # Logging level: debug, info, warn, error
-        log_level: info
-
-        # Credentials to mount into VMs
-        # credentials:
-        #   claude:
-        #     source: ~/.claude
-        #     target: /home/shed/.claude
-        #     readonly: false
-
-        # Environment file (KEY=value per line, injected into VMs)
-        # env_file: ~/.shed/env
-
-        # Extensions to enable in VMs
-        # extensions:
-        #   enabled:
-        #     - ssh-agent
-        #     - aws-credentials
-      YAML
-    end
+    write_default_config unless (etc/"shed/server.yaml").exist?
   end
 
   service do
@@ -109,7 +75,8 @@ class Shed < Formula
       The shed-server config has been installed to:
         #{etc}/shed/server.yaml
 
-      To start shed-server as a background service:
+      Edit the config to enable credential mounts and extensions,
+      then start shed-server as a background service:
         brew services start shed
 
       Logs: #{var}/log/shed-server.log
@@ -120,5 +87,137 @@ class Shed < Formula
 
   test do
     system bin/"shed", "version"
+  end
+
+  private
+
+  def write_default_config
+    if OS.mac?
+      write_macos_config
+    else
+      write_linux_config
+    end
+  end
+
+  def write_macos_config
+    (etc/"shed/server.yaml").write <<~YAML
+      # Shed Server Configuration
+      # Full reference: https://github.com/charliek/shed/blob/main/configs/server.example.yaml
+
+      name: my-server
+
+      http_port: 8080
+      ssh_port: 2222
+
+      default_backend: vz
+      log_level: info
+
+      # Credentials to mount into VMs
+      # Using ~/.shed/mounts/ keeps host and VM configs separate.
+      # credentials:
+      #   claude:
+      #     source: ~/.shed/mounts/claude
+      #     target: /home/shed/.claude
+      #     readonly: false
+      #   codex:
+      #     source: ~/.shed/mounts/codex
+      #     target: /home/shed/.codex
+      #     readonly: false
+      #   opencode_data:
+      #     source: ~/.shed/mounts/opencode/share
+      #     target: /home/shed/.local/share/opencode
+      #     readonly: false
+      #   opencode_state:
+      #     source: ~/.shed/mounts/opencode/state
+      #     target: /home/shed/.local/state/opencode
+      #     readonly: false
+      #   gh:
+      #     source: ~/.shed/mounts/gh
+      #     target: /home/shed/.config/gh
+      #     readonly: false
+
+      # Environment file (KEY=value per line, injected into VMs)
+      # env_file: ~/.shed/env
+
+      # Extensions to enable in VMs (requires shed-host-agent)
+      # extensions:
+      #   enabled:
+      #     - ssh-agent
+      #     - aws-credentials
+      #     - docker-credentials
+
+      vz:
+        vfkit_path: vfkit
+        kernel_path: ~/Library/Application Support/shed/vz/vmlinux
+        initrd_path: ~/Library/Application Support/shed/vz/initrd.img
+        base_rootfs: ghcr.io/charliek/shed-vz-experimental:v#{version}
+        images:
+          base: ghcr.io/charliek/shed-vz-base:v#{version}
+          experimental: ghcr.io/charliek/shed-vz-experimental:v#{version}
+        instance_dir: ~/Library/Application Support/shed/vz/instances
+        socket_dir: ~/.shed/vz/sockets
+        default_cpus: 2
+        default_memory_mb: 4096
+        default_disk_gb: 20
+        start_timeout: 60s
+        stop_timeout: 10s
+    YAML
+  end
+
+  def write_linux_config
+    (etc/"shed/server.yaml").write <<~YAML
+      # Shed Server Configuration
+      # Full reference: https://github.com/charliek/shed/blob/main/configs/server.example.yaml
+
+      name: my-server
+
+      http_port: 8080
+      ssh_port: 2222
+
+      default_backend: firecracker
+      log_level: info
+
+      # Credentials to mount into VMs
+      # Using ~/.shed/mounts/ keeps host and VM configs separate.
+      # credentials:
+      #   claude:
+      #     source: ~/.shed/mounts/claude
+      #     target: /home/shed/.claude
+      #     readonly: false
+      #   codex:
+      #     source: ~/.shed/mounts/codex
+      #     target: /home/shed/.codex
+      #     readonly: false
+      #   gh:
+      #     source: ~/.shed/mounts/gh
+      #     target: /home/shed/.config/gh
+      #     readonly: false
+
+      # Environment file (KEY=value per line, injected into VMs)
+      # env_file: ~/.shed/env
+
+      # Extensions to enable in VMs (requires shed-host-agent)
+      # extensions:
+      #   enabled:
+      #     - ssh-agent
+      #     - aws-credentials
+      #     - docker-credentials
+
+      firecracker:
+        base_rootfs: ghcr.io/charliek/shed-fc-base:v#{version}
+        images:
+          base: ghcr.io/charliek/shed-fc-base:v#{version}
+        instance_dir: /var/lib/shed/firecracker/instances
+        socket_dir: /var/run/shed/firecracker
+        default_cpus: 2
+        default_memory_mb: 4096
+        default_disk_gb: 20
+        vsock_base_cid: 100
+        start_timeout: 90s
+        stop_timeout: 10s
+        bridge_name: shed-br0
+        bridge_cidr: 172.30.0.1/24
+        tap_prefix: shed-tap
+    YAML
   end
 end
