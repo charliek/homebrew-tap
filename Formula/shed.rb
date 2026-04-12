@@ -204,6 +204,7 @@ class Shed < Formula
       #     - docker-credentials
 
       firecracker:
+        kernel_path: /var/lib/shed/firecracker/images/vmlinux
         base_rootfs: ghcr.io/charliek/shed-fc-base:v#{version}
         images:
           base: ghcr.io/charliek/shed-fc-base:v#{version}
