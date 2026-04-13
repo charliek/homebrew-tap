@@ -9,19 +9,9 @@ class ShedHostAgent < Formula
       url "https://github.com/charliek/shed-extensions/releases/download/v0.3.1/shed-host-agent_darwin_arm64.tar.gz"
       sha256 "514727dedc8c12b16d972e0bd888bb2253129c8fa50ef79c1c2c1486f60403ac"
     end
-
-    on_intel do
-      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.1/shed-host-agent_darwin_amd64.tar.gz"
-      sha256 "05922a6d604e3ea0c48b0bac3e4816e1cd5c65440c6d9527727ccb4502f26508"
-    end
   end
 
   on_linux do
-    on_arm do
-      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.1/shed-host-agent_linux_arm64.tar.gz"
-      sha256 "199ce349f18cda2eebda189f32ea3826f39e71293bb383bc21617b623626f1b7"
-    end
-
     on_intel do
       url "https://github.com/charliek/shed-extensions/releases/download/v0.3.1/shed-host-agent_linux_amd64.tar.gz"
       sha256 "d0b911db2e835ee2a561d276a35e334b0b8ae11e7c1f5b5b770205ea22590dac"
@@ -65,6 +55,10 @@ class ShedHostAgent < Formula
         # Docker registry credential proxying
         docker:
           # Allowed registry hostnames (empty = none)
+          # registries:
+          #   - ghcr.io
+          #   - docker.io
+          #   - 123456789012.dkr.ecr.us-east-1.amazonaws.com
           registries: []
           # Set true to allow all registries
           allow_all: false
@@ -88,6 +82,9 @@ class ShedHostAgent < Formula
     <<~EOS
       The shed-host-agent config has been installed to:
         #{etc}/shed/extensions.yaml
+
+      Update that file with your shed server URL and any credential
+      settings before starting the service.
 
       To start shed-host-agent as a background service:
         brew services start shed-host-agent
