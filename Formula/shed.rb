@@ -41,6 +41,30 @@ class Shed < Formula
     write_default_config unless (etc/"shed/server.yaml").exist?
   end
 
+  def post_install
+    # shed-server requires the com.apple.security.virtualization entitlement
+    # to use Apple's Virtualization framework on macOS.
+    if OS.mac?
+      entitlements = buildpath/"entitlements.plist"
+      unless entitlements.exist?
+        entitlements = Pathname.new(Dir.tmpdir)/"shed-entitlements.plist"
+        entitlements.write <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>com.apple.security.virtualization</key>
+            <true/>
+          </dict>
+          </plist>
+        XML
+      end
+      system "codesign", "--force", "--sign", "-",
+             "--entitlements", entitlements.to_s,
+             "#{bin}/shed-server"
+    end
+  end
+
   service do
     run [opt_bin/"shed-server", "serve", "--config", etc/"shed/server.yaml"]
     keep_alive true
