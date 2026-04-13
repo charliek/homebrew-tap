@@ -45,23 +45,23 @@ class Shed < Formula
     # shed-server requires the com.apple.security.virtualization entitlement
     # to use Apple's Virtualization framework on macOS.
     if OS.mac?
-      entitlements = buildpath/"entitlements.plist"
-      unless entitlements.exist?
-        entitlements = Pathname.new(Dir.tmpdir)/"shed-entitlements.plist"
-        entitlements.write <<~XML
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>com.apple.security.virtualization</key>
-            <true/>
-          </dict>
-          </plist>
-        XML
-      end
+      require "tempfile"
+      tmp = Tempfile.new(["shed-entitlements", ".plist"])
+      tmp.write <<~XML
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+          <key>com.apple.security.virtualization</key>
+          <true/>
+        </dict>
+        </plist>
+      XML
+      tmp.flush
       system "codesign", "--force", "--sign", "-",
-             "--entitlements", entitlements.to_s,
+             "--entitlements", tmp.path,
              "#{bin}/shed-server"
+      tmp.close!
     end
   end
 
