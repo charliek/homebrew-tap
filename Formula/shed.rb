@@ -6,9 +6,7 @@ class Shed < Formula
 
   on_macos do
     depends_on "vfkit"
-  end
 
-  on_macos do
     on_arm do
       url "https://github.com/charliek/shed/releases/download/v0.3.1/shed_darwin_arm64.tar.gz"
       sha256 "b371b5ec98d3b10813e9c71bf3427bca98a60b8a0b4ae78f8491e005123bdc68"
@@ -18,29 +16,9 @@ class Shed < Formula
         sha256 "d3fee2f90408068298ae9c5e9547821466bd5108ebb146f9b47b988763ee6121"
       end
     end
-
-    on_intel do
-      url "https://github.com/charliek/shed/releases/download/v0.3.1/shed_darwin_amd64.tar.gz"
-      sha256 "74fe29c1b6bbe2399b8348d347e6f204db89cbac5d47d7d342e4f060e8d68eb7"
-
-      resource "shed-server" do
-        url "https://github.com/charliek/shed/releases/download/v0.3.1/shed-server_darwin_amd64.tar.gz"
-        sha256 "6f9bbb72d9b7d4a09a4b36520e947c6f7ae53a16b484b03da58b8fe6dd82317f"
-      end
-    end
   end
 
   on_linux do
-    on_arm do
-      url "https://github.com/charliek/shed/releases/download/v0.3.1/shed_linux_arm64.tar.gz"
-      sha256 "12365fe6792da37fa31f88dc4fb3d7e867f8299a822d296de73b82bdd84c244c"
-
-      resource "shed-server" do
-        url "https://github.com/charliek/shed/releases/download/v0.3.1/shed-server_linux_arm64.tar.gz"
-        sha256 "06c4bd8a67a48dd53333c4215f48c79fc924a0933f3f895762b106f2d9ef2810"
-      end
-    end
-
     on_intel do
       url "https://github.com/charliek/shed/releases/download/v0.3.1/shed_linux_amd64.tar.gz"
       sha256 "118d664554d14e96006eaa80e1cbe28b23609f0dd93dbb5ed3235823e6b7b81d"
@@ -78,6 +56,10 @@ class Shed < Formula
       Edit the config to enable credential mounts and extensions,
       then start shed-server as a background service:
         brew services start shed
+
+      To enable extensions (SSH agent forwarding, AWS credentials,
+      Docker credentials), also install the host agent:
+        brew install shed-host-agent
 
       Logs: #{var}/log/shed-server.log
 
@@ -139,7 +121,10 @@ class Shed < Formula
       # Environment file (KEY=value per line, injected into VMs)
       # env_file: ~/.shed/env
 
-      # Extensions to enable in VMs (requires shed-host-agent)
+      # Extensions provide credential brokering from host to VM.
+      # Requires shed-host-agent to be installed and running:
+      #   brew install shed-host-agent
+      #   brew services start shed-host-agent
       # extensions:
       #   enabled:
       #     - ssh-agent
@@ -196,7 +181,10 @@ class Shed < Formula
       # Environment file (KEY=value per line, injected into VMs)
       # env_file: ~/.shed/env
 
-      # Extensions to enable in VMs (requires shed-host-agent)
+      # Extensions provide credential brokering from host to VM.
+      # Requires shed-host-agent to be installed and running:
+      #   brew install shed-host-agent
+      #   brew services start shed-host-agent
       # extensions:
       #   enabled:
       #     - ssh-agent
