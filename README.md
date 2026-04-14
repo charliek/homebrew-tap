@@ -27,9 +27,10 @@ Both `shed-server` and `shed-host-agent` can be managed as background services:
 brew services start shed            # start shed-server daemon
 brew services start shed-host-agent # start credential brokering agent
 brew services list                  # check status
-brew services log shed              # view shed-server logs
-brew services log shed-host-agent   # view host-agent logs
+brew services restart shed          # restart after config changes
 ```
+
+Logs are at `$(brew --prefix)/var/log/shed-server.log` and `$(brew --prefix)/var/log/shed-host-agent.log`.
 
 ## Configuration
 
