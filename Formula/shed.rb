@@ -70,6 +70,7 @@ class Shed < Formula
     keep_alive true
     log_path var/"log/shed-server.log"
     error_log_path var/"log/shed-server.log"
+    environment_variables PATH: "/usr/local/bin:#{std_service_path_env}"
   end
 
   def caveats
@@ -168,6 +169,9 @@ class Shed < Formula
         default_cpus: 2
         default_memory_mb: 4096
         default_disk_gb: 20
+        console_port: 1024
+        notify_port: 1026
+        tcp_proxy_port: 1028
         start_timeout: 60s
         stop_timeout: 10s
     YAML
@@ -226,6 +230,8 @@ class Shed < Formula
         default_memory_mb: 4096
         default_disk_gb: 20
         vsock_base_cid: 100
+        console_port: 1024
+        notify_port: 1026
         start_timeout: 90s
         stop_timeout: 10s
         bridge_name: shed-br0
