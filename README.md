@@ -9,6 +9,7 @@ brew tap charliek/tap
 brew install shed
 brew install shed-host-agent
 brew install prox
+brew install envsecrets
 ```
 
 ## Formulae
@@ -18,6 +19,7 @@ brew install prox
 | `shed` | CLI and server for managing persistent VM-based dev environments |
 | `shed-host-agent` | Host-side credential brokering agent for shed VMs |
 | `prox` | Modern process manager for development with API-first design |
+| `envsecrets` | CLI for managing encrypted environment files via GCS and age encryption |
 
 ## Services
 
