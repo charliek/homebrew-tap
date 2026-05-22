@@ -9,6 +9,7 @@ class Shed < Formula
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
+  depends_on "erofs-utils"
 
   on_macos do
     if Hardware::CPU.intel?
