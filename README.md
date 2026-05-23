@@ -10,6 +10,7 @@ brew install shed
 brew install shed-host-agent
 brew install prox
 brew install envsecrets
+brew install codelens
 ```
 
 ## Formulae
@@ -20,6 +21,11 @@ brew install envsecrets
 | `shed-host-agent` | Host-side credential brokering agent for shed VMs |
 | `prox` | Modern process manager for development with API-first design |
 | `envsecrets` | CLI for managing encrypted environment files via GCS and age encryption |
+| `codelens` | Analyze JVM codebases (Java & Kotlin) — classes, methods, handlers, and source |
+
+`codelens` runs a JDK 21+ server under the hood. Provide a JDK via SDKMAN
+(`sdk install java 21.0.9-amzn`) or Homebrew (`brew install openjdk@21`). See the
+[codelens docs](https://charliek.github.io/codelens/).
 
 ## Services
 
