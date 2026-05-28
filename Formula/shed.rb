@@ -5,15 +5,15 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.5.5"
+  version "0.5.6"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.5.5/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "8efc325d7a3aa1c74b22d85e4e4b45096735ea8e908c80646d42f7e3222a3dc8"
+      url "https://github.com/charliek/shed/releases/download/v0.5.6/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "ef70d85314c9b02028fbc29547c492c0a6c49fd4fb4ba5f6be99bf1578246c9d"
 
       define_method(:install) do
         bin.install "shed"
@@ -74,11 +74,11 @@ class Shed < Formula
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
-                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-vz-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-vz-full:v0.5.5
+                  base: ghcr.io/charliek/shed-vz-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-vz-full:v0.5.6
                 instance_dir: ~/Library/Application Support/shed/vz/instances
                 socket_dir: ~/.shed/vz/sockets
                 default_cpus: 2
@@ -134,11 +134,11 @@ class Shed < Formula
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
-                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-fc-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-fc-full:v0.5.5
+                  base: ghcr.io/charliek/shed-fc-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-fc-full:v0.5.6
                 instance_dir: /var/lib/shed/firecracker/instances
                 socket_dir: /var/run/shed/firecracker
                 default_cpus: 2
@@ -158,8 +158,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.5.5/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "bf8b228aad9ba8ecb54ea7d0f5643711d35991ef212b714024a4650685197f20"
+      url "https://github.com/charliek/shed/releases/download/v0.5.6/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "ec718ccb5e27e8997bddd45c2216b7b0a0adeaf3487b9a8f1e985edbfda12006"
 
       define_method(:install) do
         bin.install "shed"
@@ -220,11 +220,11 @@ class Shed < Formula
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
-                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-vz-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-vz-full:v0.5.5
+                  base: ghcr.io/charliek/shed-vz-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-vz-full:v0.5.6
                 instance_dir: ~/Library/Application Support/shed/vz/instances
                 socket_dir: ~/.shed/vz/sockets
                 default_cpus: 2
@@ -280,11 +280,11 @@ class Shed < Formula
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
-                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-fc-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-fc-full:v0.5.5
+                  base: ghcr.io/charliek/shed-fc-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-fc-full:v0.5.6
                 instance_dir: /var/lib/shed/firecracker/instances
                 socket_dir: /var/run/shed/firecracker
                 default_cpus: 2
@@ -307,8 +307,8 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.5.5/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "235c9111de3d9fa14811c6a4bb1ac3cca246a658d8c5ec5ba6f120d9fdb64868"
+      url "https://github.com/charliek/shed/releases/download/v0.5.6/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "be65f9c6567c2d3ac2cbc0baafac191caaa17ed77e1eab13d6c508b65788ae93"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -368,11 +368,11 @@ class Shed < Formula
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
-                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-vz-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-vz-full:v0.5.5
+                  base: ghcr.io/charliek/shed-vz-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-vz-full:v0.5.6
                 instance_dir: ~/Library/Application Support/shed/vz/instances
                 socket_dir: ~/.shed/vz/sockets
                 default_cpus: 2
@@ -428,11 +428,11 @@ class Shed < Formula
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
-                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-fc-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-fc-full:v0.5.5
+                  base: ghcr.io/charliek/shed-fc-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-fc-full:v0.5.6
                 instance_dir: /var/lib/shed/firecracker/instances
                 socket_dir: /var/run/shed/firecracker
                 default_cpus: 2
@@ -452,8 +452,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.5.5/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "48a2ce989518aab85cc5aeca5ccc23d23029f1f33798232cb3a1e1b4c076b38f"
+      url "https://github.com/charliek/shed/releases/download/v0.5.6/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "ff324ab970cbf683c27124f9a9d173a23b522cabc103e685ec69ea6eb9e27b44"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -513,11 +513,11 @@ class Shed < Formula
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
-                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-vz-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-vz-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-vz-full:v0.5.5
+                  base: ghcr.io/charliek/shed-vz-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-vz-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-vz-full:v0.5.6
                 instance_dir: ~/Library/Application Support/shed/vz/instances
                 socket_dir: ~/.shed/vz/sockets
                 default_cpus: 2
@@ -573,11 +573,11 @@ class Shed < Formula
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
-                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.5
+                base_rootfs: ghcr.io/charliek/shed-fc-full:v0.5.6
                 images:
-                  base: ghcr.io/charliek/shed-fc-base:v0.5.5
-                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.5
-                  full: ghcr.io/charliek/shed-fc-full:v0.5.5
+                  base: ghcr.io/charliek/shed-fc-base:v0.5.6
+                  extensions: ghcr.io/charliek/shed-fc-extensions:v0.5.6
+                  full: ghcr.io/charliek/shed-fc-full:v0.5.6
                 instance_dir: /var/lib/shed/firecracker/instances
                 socket_dir: /var/run/shed/firecracker
                 default_cpus: 2
