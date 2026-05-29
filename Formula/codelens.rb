@@ -5,13 +5,13 @@
 class Codelens < Formula
   desc "Analyze JVM codebases (Java & Kotlin) — classes, methods, handlers, and more"
   homepage "https://github.com/charliek/codelens"
-  version "0.0.3"
+  version "0.0.4"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/codelens/releases/download/v0.0.3/codelens_darwin_amd64.tar.gz"
-      sha256 "1e0a669f92200d17e6ca05339bb250b343b76b7a3a94192b47c3a7f2c02e233e"
+      url "https://github.com/charliek/codelens/releases/download/v0.0.4/codelens_darwin_amd64.tar.gz"
+      sha256 "91736f6502f98d7d3a818452fbba8171a98389c9eff11963ddaf9a46bd10fb00"
 
       define_method(:install) do
         bin.install "codelens"
@@ -19,8 +19,8 @@ class Codelens < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/codelens/releases/download/v0.0.3/codelens_darwin_arm64.tar.gz"
-      sha256 "ab01b8b9c95889c54ac6cad61eeb1ef92983be2747156e79b00979c9a5ee54b2"
+      url "https://github.com/charliek/codelens/releases/download/v0.0.4/codelens_darwin_arm64.tar.gz"
+      sha256 "51b5a0e9087973f680dcdaf1e66646ca2c7a571bfb833a053ca036ffa600d359"
 
       define_method(:install) do
         bin.install "codelens"
@@ -31,16 +31,16 @@ class Codelens < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/codelens/releases/download/v0.0.3/codelens_linux_amd64.tar.gz"
-      sha256 "7cdb5d1b64e34b05a72fb2382d9c9cd399d1d4b3ffa10fdc0163aca425a396f9"
+      url "https://github.com/charliek/codelens/releases/download/v0.0.4/codelens_linux_amd64.tar.gz"
+      sha256 "cc743889cbdcc6f38c2edc837acdb63e16d47bc0a988674d8909a16ac9d0f9be"
       define_method(:install) do
         bin.install "codelens"
         libexec.install "codelens-server-all.jar"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/codelens/releases/download/v0.0.3/codelens_linux_arm64.tar.gz"
-      sha256 "4a9199363cce767c9908ccff3a1e273904a61327b5ee9ce4c4ccdb15f64c89a4"
+      url "https://github.com/charliek/codelens/releases/download/v0.0.4/codelens_linux_arm64.tar.gz"
+      sha256 "48aa253fdc0ae04d6e64a641816adb3d406d70b0585856689d96ed77f027e91a"
       define_method(:install) do
         bin.install "codelens"
         libexec.install "codelens-server-all.jar"
