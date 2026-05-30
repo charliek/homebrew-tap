@@ -1,3 +1,7 @@
+# DO NOT REMOVE: The "# envsecrets" marker below is used by the envsecrets CLI
+# to track which secret files it manages. See https://github.com/charliek/envsecrets
+# envsecrets
 .env
+
 .env.*
 !.env.example
