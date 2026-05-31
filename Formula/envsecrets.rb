@@ -5,21 +5,21 @@
 class Envsecrets < Formula
   desc "CLI tool for managing encrypted environment files using GCS and age encryption"
   homepage "https://github.com/charliek/envsecrets"
-  version "0.0.8"
+  version "0.0.9"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/envsecrets/releases/download/v0.0.8/envsecrets_darwin_amd64.tar.gz"
-      sha256 "62d4761087b5d4807b86f7caaf7261273de738aae6424a8f83e309c7af6e9c3a"
+      url "https://github.com/charliek/envsecrets/releases/download/v0.0.9/envsecrets_darwin_amd64.tar.gz"
+      sha256 "5e3f7c3af3b38e7923f195d5477a13a272e64fe26afae6bfb007ce94a261b94e"
 
       define_method(:install) do
         bin.install "envsecrets"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/envsecrets/releases/download/v0.0.8/envsecrets_darwin_arm64.tar.gz"
-      sha256 "7071710377a2763efe1d37ade7f8421dc6ebfbcd5126478f974de93df11d11d4"
+      url "https://github.com/charliek/envsecrets/releases/download/v0.0.9/envsecrets_darwin_arm64.tar.gz"
+      sha256 "8bf45e9966d2c0a150ef9e70d8266ae16611f2f40af184c8a4ca58cd31be3a34"
 
       define_method(:install) do
         bin.install "envsecrets"
@@ -29,15 +29,15 @@ class Envsecrets < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/envsecrets/releases/download/v0.0.8/envsecrets_linux_amd64.tar.gz"
-      sha256 "95f5455b6c4f00183f2c09e2e06e3d279a8893ebb26c03ad7cda2e46d7063c20"
+      url "https://github.com/charliek/envsecrets/releases/download/v0.0.9/envsecrets_linux_amd64.tar.gz"
+      sha256 "441f02313df94999c7e77eb6eb60ef552c4f7e93b50851450455811131ae0af5"
       define_method(:install) do
         bin.install "envsecrets"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/envsecrets/releases/download/v0.0.8/envsecrets_linux_arm64.tar.gz"
-      sha256 "d3e2c0d8c258933d5567dba70f656236a5887b39644c6d4f2248a59bf1d7bfc4"
+      url "https://github.com/charliek/envsecrets/releases/download/v0.0.9/envsecrets_linux_arm64.tar.gz"
+      sha256 "db887951dd5113572fe29b6b2003b471c5b9ac5900631f52ed147d46e6bda079"
       define_method(:install) do
         bin.install "envsecrets"
       end
