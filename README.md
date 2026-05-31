@@ -52,14 +52,23 @@ Analyze JVM codebases (Java & Kotlin) — classes, methods, annotations, type
 hierarchies, call sites (`calls`), cross-references (`xref`), the dependency
 graph (`deps`), and source.
 
+codelens commands locate the per-project server by working directory, so
+either `cd` into the project first or pass `-p path/to/project` (a global
+flag) on every invocation:
+
 ```bash
-codelens start path/to/project   # start the analysis server for a project
-codelens classes --help          # list/search classes
+cd path/to/project
+codelens start                   # start the analysis server for this project
+codelens classes list            # list classes
 codelens methods --help          # search methods
 codelens xref com.example.Foo    # what references this type?
-codelens list                    # running servers
+codelens status                  # is the server running for this project?
+codelens stop                    # stop the server for this project
+codelens list                    # all running servers (no project needed)
 codelens --help                  # all commands
 ```
+
+Equivalently, from anywhere: `codelens -p path/to/project classes list`.
 
 - Repo: <https://github.com/charliek/codelens>
 - Docs: <https://charliek.github.io/codelens/>
