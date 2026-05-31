@@ -21,7 +21,7 @@ brew install envsecrets
 | Formula | Description |
 |---------|-------------|
 | `strix` | Focused, polished TUI for staging changes and viewing diffs |
-| `codelens` | Analyze JVM codebases (Java & Kotlin) — classes, methods, handlers, and source |
+| `codelens` | Analyze JVM codebases (Java & Kotlin) — classes, methods, handlers, and more |
 | `shed` | CLI and server for managing persistent VM-based dev environments |
 | `shed-host-agent` | Host-side credential brokering agent for shed VMs |
 | `prox` | Modern process manager for development with API-first design |
