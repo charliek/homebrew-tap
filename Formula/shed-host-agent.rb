@@ -5,13 +5,13 @@
 class ShedHostAgent < Formula
   desc "Host-side credential brokering agent for shed VMs"
   homepage "https://github.com/charliek/shed-extensions"
-  version "0.3.5"
+  version "0.3.6"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.5/shed-host-agent_darwin_amd64.tar.gz"
-      sha256 "42323bf9cb77b45d093195f427f7e62ca0cefe98337b1d28670b8832fea44677"
+      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.6/shed-host-agent_darwin_amd64.tar.gz"
+      sha256 "63f6b98f7545c57b5782583620d161fa3c7059be630b2775d66184b965087bd5"
 
       define_method(:install) do
         bin.install "shed-host-agent"
@@ -20,8 +20,8 @@ class ShedHostAgent < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.5/shed-host-agent_darwin_arm64.tar.gz"
-      sha256 "5f51f2f3041b97f4ff46ee6f33fa4d948aa8c0d17af267b14809fff8567d3a3f"
+      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.6/shed-host-agent_darwin_arm64.tar.gz"
+      sha256 "e542773bac8734e44acba7efff1d59b3b115952b57f7a6e8cc6e84535baabe49"
 
       define_method(:install) do
         bin.install "shed-host-agent"
@@ -33,8 +33,8 @@ class ShedHostAgent < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.5/shed-host-agent_linux_amd64.tar.gz"
-      sha256 "7b61c4d19cb7b71307dde7be41e4643465e307ab5ca84cde35b73490e9d53966"
+      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.6/shed-host-agent_linux_amd64.tar.gz"
+      sha256 "2e5ea246e306452f89440f2fd8aa71fe9eccc285f9993b24aac53c4d1357ac28"
       define_method(:install) do
         bin.install "shed-host-agent"
         (etc/"shed").mkpath
@@ -42,8 +42,8 @@ class ShedHostAgent < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.5/shed-host-agent_linux_arm64.tar.gz"
-      sha256 "601be5926202c9dbfee043e986e6ac115e6a1c613d84016e677ab4fd90887021"
+      url "https://github.com/charliek/shed-extensions/releases/download/v0.3.6/shed-host-agent_linux_arm64.tar.gz"
+      sha256 "a495ddf63b445549d1feb98cbc67dd7443a71577b1d7265305e61b7b86f154fe"
       define_method(:install) do
         bin.install "shed-host-agent"
         (etc/"shed").mkpath
@@ -68,10 +68,13 @@ class ShedHostAgent < Formula
   end
 
   service do
-    run [opt_bin/"shed-host-agent", "-config", etc/"shed/extensions.yaml"]
+    # The agent writes its own size-capped, rotated operational log via
+    # -log-file. launchd never rotates, so the previously-captured stderr log
+    # grew unbounded (observed at 21 MB); error_log_path now only catches
+    # pre-logger panics / runtime crashes (tiny).
+    run [opt_bin/"shed-host-agent", "-config", etc/"shed/extensions.yaml", "-log-file", var/"log/shed-host-agent.log"]
     keep_alive true
-    log_path var/"log/shed-host-agent.log"
-    error_log_path var/"log/shed-host-agent.log"
+    error_log_path var/"log/shed-host-agent.err.log"
     # launchd provides only a bare PATH; include the locations where Docker
     # Desktop (/usr/local/bin) and Homebrew (/opt/homebrew/bin) install
     # credential helpers so docker-credential-* can be resolved.
