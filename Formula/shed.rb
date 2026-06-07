@@ -5,15 +5,15 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.6.3"
+  version "0.6.4"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.6.3/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "557611a59121108b800292f80925e3b09dabed6b55376105090bb99445f2bfa6"
+      url "https://github.com/charliek/shed/releases/download/v0.6.4/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "45084d53786fa2c5eac7ea27d868c1ffc97e162be06bf67275cc6a51eb7b728d"
 
       define_method(:install) do
         bin.install "shed"
@@ -33,9 +33,9 @@ class Shed < Formula
               default_backend: vz
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -102,9 +102,9 @@ class Shed < Formula
               default_backend: firecracker
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -156,8 +156,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.6.3/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "46578129ebb125b5d76b8bf896ee669096442cc75461e17e22c7ad518ab26fe1"
+      url "https://github.com/charliek/shed/releases/download/v0.6.4/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "55db9594c6b6e9f4dd954675586c201dde2b05742ccae09eb5c2d516d918bc32"
 
       define_method(:install) do
         bin.install "shed"
@@ -177,9 +177,9 @@ class Shed < Formula
               default_backend: vz
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -246,9 +246,9 @@ class Shed < Formula
               default_backend: firecracker
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -303,8 +303,8 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.6.3/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "ba125b07a6b89e38fe254a1c36642898745c7267a884c7266af63eb6869a50bf"
+      url "https://github.com/charliek/shed/releases/download/v0.6.4/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "94286bcd1f4b97bbf21c73b2b765968d72fa77d718dc8402e0fa68e9e4a8c045"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -323,9 +323,9 @@ class Shed < Formula
               default_backend: vz
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -392,9 +392,9 @@ class Shed < Formula
               default_backend: firecracker
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -446,8 +446,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.6.3/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "0a9871ce229887c448542b7278b5ac60d2ffb3c879c8b9e771043628bb992399"
+      url "https://github.com/charliek/shed/releases/download/v0.6.4/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "6f0874faf5488be81680327aa55134da7d72bcb7235e5dad2818ac9afaca464f"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -466,9 +466,9 @@ class Shed < Formula
               default_backend: vz
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
@@ -535,9 +535,9 @@ class Shed < Formula
               default_backend: firecracker
               log_level: info
 
-              # Credentials to mount into VMs
+              # Host directories to mount into every shed (formerly "credentials")
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
-              # credentials:
+              # mounts:
               #   claude:
               #     source: ~/.shed/mounts/claude
               #     target: /home/shed/.claude
