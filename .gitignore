@@ -2,6 +2,8 @@
 # to track which secret files it manages. See https://github.com/charliek/envsecrets
 # envsecrets
 .env
+cert/charliek-release-bot.private-key.pem
 
 .env.*
 !.env.example
+certs/
