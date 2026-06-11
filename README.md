@@ -162,6 +162,12 @@ brew services list                  # check status
 brew services restart shed          # restart after config changes
 ```
 
+Verify the credential agent is running and see which config it loaded:
+
+```bash
+shed-host-agent status              # queries the running agent (no flags needed)
+```
+
 Logs are at `$(brew --prefix)/var/log/shed-server.log` and
 `$(brew --prefix)/var/log/shed-host-agent.log`.
 
