@@ -11,7 +11,7 @@ class ShedHostAgent < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/charliek/shed-extensions/releases/download/v0.4.2/shed-host-agent_darwin_amd64.tar.gz"
-      sha256 "7747b7ddd7a595dd072deb8b83243a8cabe2deca51a67a4c7b44fea334d4e4f2"
+      sha256 "3abf0b58c8b29f5457b738531c9933b20c216678b17da306b322138a010bf4ee"
 
       define_method(:install) do
         bin.install "shed-host-agent"
@@ -21,7 +21,7 @@ class ShedHostAgent < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/charliek/shed-extensions/releases/download/v0.4.2/shed-host-agent_darwin_arm64.tar.gz"
-      sha256 "74aa8d5a0c8d4d17fc0ded4f00c59d8fe1f332256886e13fd315a3a65185cc6a"
+      sha256 "48d01b57dd7bfef67fb85b551fa559552e19029be8acd8808080847a8562cbf2"
 
       define_method(:install) do
         bin.install "shed-host-agent"
@@ -34,7 +34,7 @@ class ShedHostAgent < Formula
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://github.com/charliek/shed-extensions/releases/download/v0.4.2/shed-host-agent_linux_amd64.tar.gz"
-      sha256 "a6e5abe22adc8dcfa8b4e1b2ec6c98a23d5a1229e23c739a098368d080d7981d"
+      sha256 "49f5da7b86ae3b8081d6c930ada629363febe4d21c53aa1202acae0f1ce8428e"
       define_method(:install) do
         bin.install "shed-host-agent"
         (etc/"shed").mkpath
@@ -43,7 +43,7 @@ class ShedHostAgent < Formula
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/charliek/shed-extensions/releases/download/v0.4.2/shed-host-agent_linux_arm64.tar.gz"
-      sha256 "c06bab6ece0bfcbb7a07d00cfad911d557c4ccabc631b6f510703ccc03616c5f"
+      sha256 "755ae87a251c6d0ee8df68ded9fb9e7f1c9d86e73a07e1c5dbd33838f460bff8"
       define_method(:install) do
         bin.install "shed-host-agent"
         (etc/"shed").mkpath
