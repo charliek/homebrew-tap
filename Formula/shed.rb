@@ -5,19 +5,20 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.7.0"
+  version "0.7.1"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.7.0/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "ea494d82dfefdd7d8cb52d4212c9351aa4a0188912262d5f14c0142d1459b40f"
+      url "https://github.com/charliek/shed/releases/download/v0.7.1/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "1e8cd6fa020abdb77be3bafc356e574cd23a48d1b58d8cfd1d615e1882236e75"
 
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
+        bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
           if OS.mac?
@@ -156,12 +157,13 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.7.0/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "804fb923dc02e59e1943185cb61ab5ce92cfef8c44a3481271edcae912af9446"
+      url "https://github.com/charliek/shed/releases/download/v0.7.1/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "cb8d3563202862b244f0ff49505ef45b7e5bfcaffadf01860f0c01b6ffff1313"
 
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
+        bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
           if OS.mac?
@@ -303,11 +305,12 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.0/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "8efc1b239813d136cc3580567c06afc625a0470469bea3b9a02c3ee47825fa70"
+      url "https://github.com/charliek/shed/releases/download/v0.7.1/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "91d5d0fc943db3bbf819a13596f54f1184ae3bd03f1773156edab3fb9255475a"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
+        bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
           if OS.mac?
@@ -446,11 +449,12 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.0/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "cf9d885ee0c7d9dfca890dfd9bd8fba2a6c16da85ad203ada35473979308aec3"
+      url "https://github.com/charliek/shed/releases/download/v0.7.1/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "734252d8ef45ff5d6de8aa5a021286866faf8282d34b7530998e583f21dab9fa"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
+        bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
           if OS.mac?
