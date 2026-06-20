@@ -5,15 +5,15 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.7.3"
+  version "0.7.4"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.7.3/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "99118f728de431729cdf7a61b9affbbce1b5c69f2938a66b43a3feae272d40f8"
+      url "https://github.com/charliek/shed/releases/download/v0.7.4/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "c76a83421c0c1733549e3b9afaeda6f233e1b039e2309ebe30de123c892d36a8"
 
       define_method(:install) do
         bin.install "shed"
@@ -30,6 +30,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
@@ -99,6 +107,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
@@ -157,8 +173,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.7.3/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "9939acbf51967248542055c6789e472a79f5c4e691f11ecf9414337c713198c6"
+      url "https://github.com/charliek/shed/releases/download/v0.7.4/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "6eec72bf23f861d21a689a26eaea0bf6223cca78e23f134060afd3557bad9b60"
 
       define_method(:install) do
         bin.install "shed"
@@ -175,6 +191,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
@@ -244,6 +268,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
@@ -305,8 +337,8 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.3/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "6433acc72b46686b73513b6202d8f7ee993b8b3576f36675b455137590312c69"
+      url "https://github.com/charliek/shed/releases/download/v0.7.4/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "5faedc012f74cbdb049a6484f95bf7191b83cba66b228c0c43d128173b009422"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -322,6 +354,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
@@ -391,6 +431,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
@@ -449,8 +497,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.3/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "3b0412739e419646ca1c90ee1b6fb262b8fb4750524eee991c375ca9a236b24a"
+      url "https://github.com/charliek/shed/releases/download/v0.7.4/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "b01ba74a9b46d3b339259ed3e28b616349ce1f933373a2ab430b22ae0c808744"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -466,6 +514,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
@@ -535,6 +591,14 @@ class Shed < Formula
 
               http_port: 8080
               ssh_port: 2222
+
+              # bind_address: which interface every listener (HTTP/SSH) uses.
+              # Default loopback (127.0.0.1) = reachable on this machine only. To
+              # reach it from other hosts, prefer secure mode (auth.mode: secure;
+              # see the reference above) with bind_address: 0.0.0.0; or, for an
+              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
+              # and allow_insecure_exposure: true.
+              bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
@@ -624,6 +688,10 @@ class Shed < Formula
       Edit the config to enable credential mounts and extensions,
       then start shed-server as a background service:
         brew services start shed
+
+      By default shed-server listens on 127.0.0.1 only (the local-development
+      default). To reach it from other machines set bind_address in the config —
+      prefer auth.mode: secure for anything exposed on a network.
 
       To enable extensions (SSH agent forwarding, AWS credentials,
       Docker credentials), also install the host agent:
