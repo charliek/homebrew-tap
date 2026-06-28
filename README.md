@@ -12,6 +12,7 @@ brew install strix
 brew install codelens
 brew install shed
 brew install shed-host-agent
+brew install shed-machine-rc
 brew install prox
 brew install envsecrets
 ```
@@ -24,6 +25,7 @@ brew install envsecrets
 | `codelens` | Analyze JVM codebases (Java & Kotlin) — classes, methods, handlers, and more |
 | `shed` | CLI and server for managing persistent VM-based dev environments |
 | `shed-host-agent` | Host-side credential brokering agent for shed VMs |
+| `shed-machine-rc` | RC session helper for native machines — create/watch `claude remote-control` sessions, the host-side sibling of `shed-ext-rc` |
 | `prox` | Modern process manager for development with API-first design |
 | `envsecrets` | CLI for managing encrypted environment files via GCS and age encryption |
 
@@ -109,6 +111,23 @@ shed-host-agent --help       # config flag (path to extensions.yaml)
 - Docs: <https://charliek.github.io/shed-extensions/>
 
 Configured and started as a service — see [Services & setup](#services--setup).
+
+### shed-machine-rc
+
+Host-side helper for **RC sessions on native machines** — the sibling of the in-shed
+`shed-ext-rc`. Create, list, and tear down `claude remote-control` tmux sessions on a
+laptop / workstation / tailnet host so
+[shed-remote-agent](https://github.com/charliek/shed-remote-agent) (and, later,
+shed-mobile) can watch them. Needs `claude` and `tmux` installed.
+
+```bash
+shed-machine-rc claude   # start a local auto-mode session, print its claude.ai URL, walk away
+shed-machine-rc list     # list RC sessions on this machine
+shed-machine-rc --help
+```
+
+- Repo: <https://github.com/charliek/shed-extensions>
+- Docs: <https://charliek.github.io/shed-extensions/reference/shed-machine-rc/>
 
 ### prox
 
