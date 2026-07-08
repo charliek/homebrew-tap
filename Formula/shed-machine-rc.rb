@@ -5,21 +5,21 @@
 class ShedMachineRc < Formula
   desc "RC session helper for native machines (claude remote-control), sibling of shed-ext-rc"
   homepage "https://github.com/charliek/shed"
-  version "0.7.9"
+  version "0.7.10"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-machine-rc_darwin_amd64.tar.gz"
-      sha256 "9418d1671e63eb39ea72321cf7cd464ececdce1883bb54ab9c2b35e3787c027d"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-machine-rc_darwin_amd64.tar.gz"
+      sha256 "11aaa3537b4b60fd01507bfc5d5b14c22ff01641816f50d30e8c5dceb453b34c"
 
       define_method(:install) do
         bin.install "shed-machine-rc"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-machine-rc_darwin_arm64.tar.gz"
-      sha256 "fc9bf2068d89420399b8f60b5ebf1a62d45729f5263908a09cedf551918f5fe6"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-machine-rc_darwin_arm64.tar.gz"
+      sha256 "1488c33a0da7f755bae18930a4a71b112ed4fdf9298a187df3f6a7c69e0feca0"
 
       define_method(:install) do
         bin.install "shed-machine-rc"
@@ -29,15 +29,15 @@ class ShedMachineRc < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-machine-rc_linux_amd64.tar.gz"
-      sha256 "c3e50d2b0419801c93dbbcf807a144cd1cb52e667b818a22ca303b2e92a31779"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-machine-rc_linux_amd64.tar.gz"
+      sha256 "e60cc75d73422fd171b398c626d9909fc46d4caf8d770c542bb391efa36b57a0"
       define_method(:install) do
         bin.install "shed-machine-rc"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-machine-rc_linux_arm64.tar.gz"
-      sha256 "a452e160d22402c0b0812c7f0af70247dea19a0de732f620a40f7e5276d9924f"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-machine-rc_linux_arm64.tar.gz"
+      sha256 "a54a84f930d942c4cc9f950a702418dba4022424d93d08fb76a71eb27d764ff8"
       define_method(:install) do
         bin.install "shed-machine-rc"
       end
