@@ -5,13 +5,13 @@
 class ShedHostAgent < Formula
   desc "Host-side credential brokering agent for shed VMs"
   homepage "https://github.com/charliek/shed"
-  version "0.7.9"
+  version "0.7.10"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-host-agent_darwin_amd64.tar.gz"
-      sha256 "f9d307a32433a3f41a96370a3361590e7af44fbabff6df9700998d60fe5c59b5"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-host-agent_darwin_amd64.tar.gz"
+      sha256 "a911f757cce17b80e801345e3bc5979e42f23d72c921250aea80045e323aff88"
 
       define_method(:install) do
         bin.install "shed-host-agent"
@@ -20,8 +20,8 @@ class ShedHostAgent < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-host-agent_darwin_arm64.tar.gz"
-      sha256 "56fcb752fa78b429ee432fafeead9551504d5f21335bcbd3a6051947d3c6f26a"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-host-agent_darwin_arm64.tar.gz"
+      sha256 "77ac0d259e0f9e79cb780d195f24614fbae7ad9c11bd444c694b1f44995c081b"
 
       define_method(:install) do
         bin.install "shed-host-agent"
@@ -33,8 +33,8 @@ class ShedHostAgent < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-host-agent_linux_amd64.tar.gz"
-      sha256 "b2e2a3ce8ef946f0a17c5ea7d79517ec528f3305cb5db29a9f165de0313093f3"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-host-agent_linux_amd64.tar.gz"
+      sha256 "4395324d3f73db9a9fec47c19e308667f6284d231649e414b8328b1c89612841"
       define_method(:install) do
         bin.install "shed-host-agent"
         (etc/"shed").mkpath
@@ -42,8 +42,8 @@ class ShedHostAgent < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-host-agent_linux_arm64.tar.gz"
-      sha256 "ecec69542a3efe1033fbac43c0c17df7bfa67dcbf1755b2c2e4fff4a6b333b0b"
+      url "https://github.com/charliek/shed/releases/download/v0.7.10/shed-host-agent_linux_arm64.tar.gz"
+      sha256 "814281b5554a41db908c085cf5686410d567b512df0420b1d6a3c10d3ddb0f97"
       define_method(:install) do
         bin.install "shed-host-agent"
         (etc/"shed").mkpath
