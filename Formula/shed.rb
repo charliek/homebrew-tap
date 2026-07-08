@@ -5,15 +5,15 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.7.8"
+  version "0.7.9"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.7.8/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "2bb91ac1e0abaa8347cf07eed92ec7eaa6d7b051d47b711e22e87c0b120536ca"
+      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "11947832879bc8664cad386407b2f398855844b1fc8df05d9973a519ab4c3933"
 
       define_method(:install) do
         bin.install "shed"
@@ -173,8 +173,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.7.8/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "ee69b539c286494174a810da244b7057fa9e3b3dd9498cad876c2349ce7dece0"
+      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "9c3510f772a9bb03cf8bb4395b5cbdb6ec577aa914807711d5f690dcf726ca41"
 
       define_method(:install) do
         bin.install "shed"
@@ -337,8 +337,8 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.8/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "8f8b32fbfeafc461663d5bd3471105186f97ccba11de00e7b0beee1cea09ff67"
+      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "a5dac543fbb4b10fa83ba6aed76a31fe9209e400cfae863fcc55c6d8ecaa9e1a"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
@@ -497,8 +497,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.7.8/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "2eef5b7a2ba5ed5c73f04edf5b43e9cf1e27c505d73d54effbdc79aff883101a"
+      url "https://github.com/charliek/shed/releases/download/v0.7.9/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "098ba1a0491b26785c5b71cbdb96800d2a68789293fc60ac334ab048b90e76fe"
       define_method(:install) do
         bin.install "shed"
         bin.install "shed-server"
