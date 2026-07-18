@@ -5,21 +5,21 @@
 class Prox < Formula
   desc "Modern process manager for development with API-first design"
   homepage "https://github.com/charliek/prox"
-  version "0.1.3"
+  version "0.1.4"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/prox/releases/download/v0.1.3/prox_darwin_amd64.tar.gz"
-      sha256 "cef8c94e7b6caf1e06b19f612831219dd79a9532069dda55ffc8edfa340f76fe"
+      url "https://github.com/charliek/prox/releases/download/v0.1.4/prox_darwin_amd64.tar.gz"
+      sha256 "2bf42ed1f85accfec4588d79c8548c29ef6921332cda9c09201c3e8430d867c8"
 
       define_method(:install) do
         bin.install "prox"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/prox/releases/download/v0.1.3/prox_darwin_arm64.tar.gz"
-      sha256 "fef4594e9743e312ed7066796ae5b3034ad2af5614109535be82aa9fd6fa8332"
+      url "https://github.com/charliek/prox/releases/download/v0.1.4/prox_darwin_arm64.tar.gz"
+      sha256 "37679fe6e26baaa646984d977a56ed56c6500c9841cebb98fb4dfe5368420cc7"
 
       define_method(:install) do
         bin.install "prox"
@@ -29,15 +29,15 @@ class Prox < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/prox/releases/download/v0.1.3/prox_linux_amd64.tar.gz"
-      sha256 "145c2802906bc220f1f13b6729aa87e6d807b55beb456bcbe6c430440265e3e0"
+      url "https://github.com/charliek/prox/releases/download/v0.1.4/prox_linux_amd64.tar.gz"
+      sha256 "75ae3015397d24b4e77b751a607f05a97f89ef4ff3047e8054689768a39e002c"
       define_method(:install) do
         bin.install "prox"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/prox/releases/download/v0.1.3/prox_linux_arm64.tar.gz"
-      sha256 "91d815aa1dd4af2af9f2f4610608e8a8a844bc046897f506a8505debe389c8c6"
+      url "https://github.com/charliek/prox/releases/download/v0.1.4/prox_linux_arm64.tar.gz"
+      sha256 "1bcf7192e3e6654b1565458deff187d2b78256c7230969bb08c6745644c1db17"
       define_method(:install) do
         bin.install "prox"
       end
