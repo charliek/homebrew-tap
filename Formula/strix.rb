@@ -6,23 +6,23 @@
 class Strix < Formula
   desc "A focused, polished TUI for staging changes and viewing diffs"
   homepage "https://github.com/charliek/strix"
-  version "0.0.6"
+  version "0.0.7"
   license "MIT"
 
   depends_on "git"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/strix/releases/download/v0.0.6/strix_darwin_amd64.tar.gz"
-      sha256 "29d78a4a7a4785e66745244849410ed7932aff9109386f33c3127c0b979aaba8"
+      url "https://github.com/charliek/strix/releases/download/v0.0.7/strix_darwin_amd64.tar.gz"
+      sha256 "459a8032c6d16c30805b39cb7199d848949065c5aeeaa9803f0eb0f75b60a2a2"
 
       define_method(:install) do
         bin.install "strix"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/strix/releases/download/v0.0.6/strix_darwin_arm64.tar.gz"
-      sha256 "4047051fcaebf7968302995d1773ffdad6fbb3bcd91a3afa91ab8dac52ac8dbf"
+      url "https://github.com/charliek/strix/releases/download/v0.0.7/strix_darwin_arm64.tar.gz"
+      sha256 "1838e6425ae8413dcf6c3bbcf055a403f44c66dfd7e8c701c6ad13898e05f502"
 
       define_method(:install) do
         bin.install "strix"
@@ -32,16 +32,16 @@ class Strix < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/strix/releases/download/v0.0.6/strix_linux_amd64.tar.gz"
-      sha256 "23e183e67d5af9ed90e0215bd4cd1e975ee232997e0b5f0939d4d80a5a87b212"
+      url "https://github.com/charliek/strix/releases/download/v0.0.7/strix_linux_amd64.tar.gz"
+      sha256 "ff030488d31106a946aae26ef2a0d05d68326e9be23b6093b6229ab67bc50c6d"
 
       define_method(:install) do
         bin.install "strix"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/strix/releases/download/v0.0.6/strix_linux_arm64.tar.gz"
-      sha256 "ebaff3720b892c8d1f5f2cd92ef320cc7d5831f26f3dde44da8155a292074811"
+      url "https://github.com/charliek/strix/releases/download/v0.0.7/strix_linux_arm64.tar.gz"
+      sha256 "5c8bea5c6f7dbc5557b64eb3f3190d316beeec52d57ed86ab0ce72bfb374d84f"
 
       define_method(:install) do
         bin.install "strix"
