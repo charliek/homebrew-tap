@@ -152,8 +152,11 @@ envsecrets --help         # all commands
 
 A terminal UI (TUI) that drives Cursor and Grok coding agents over ACP (Agent
 Client Protocol). craze does not bundle an agent — install and log into one
-separately: the Cursor CLI (`cursor-agent login`) or the Grok CLI (`grok
-login`).
+separately:
+
+- [Cursor CLI](https://cursor.com/cli), then `cursor-agent login`
+- [Grok CLI](https://docs.x.ai/build/cli/headless-scripting), then `grok login`
+  (or set `XAI_API_KEY`)
 
 ```bash
 craze                    # launch with the default provider
