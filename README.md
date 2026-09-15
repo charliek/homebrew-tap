@@ -1,8 +1,8 @@
 # charliek/tap
 
 Homebrew formulae for the CLIs and services I maintain — a git review TUI, a
-JVM code analyzer, microVM dev environments, a dev process manager, and
-encrypted env-file tooling.
+JVM code analyzer, microVM dev environments, a dev process manager,
+encrypted env-file tooling, and an ACP coding-agent TUI.
 
 ## Install
 
@@ -14,6 +14,7 @@ brew install shed
 brew install shed-host-agent
 brew install prox
 brew install envsecrets
+brew install craze
 ```
 
 ## Formulae
@@ -26,6 +27,7 @@ brew install envsecrets
 | `shed-host-agent` | Host-side credential brokering agent for shed VMs |
 | `prox` | Modern process manager for development with API-first design |
 | `envsecrets` | CLI for managing encrypted environment files via GCS and age encryption |
+| `craze` | Terminal UI for Cursor and Grok coding agents over ACP |
 
 ## Usage
 
@@ -145,6 +147,25 @@ envsecrets --help         # all commands
 
 - Repo: <https://github.com/charliek/envsecrets>
 - Docs: <https://charliek.github.io/envsecrets/>
+
+### craze
+
+A terminal UI (TUI) that drives Cursor and Grok coding agents over ACP (Agent
+Client Protocol). craze does not bundle an agent — install and log into one
+separately:
+
+- [Cursor CLI](https://cursor.com/cli), then `cursor-agent login`
+- [Grok CLI](https://docs.x.ai/build/cli/headless-scripting), then `grok login`
+  (or set `XAI_API_KEY`)
+
+```bash
+craze                    # launch with the default provider
+craze --provider grok    # launch against the Grok CLI instead of Cursor
+craze --help             # all options
+```
+
+- Repo: <https://github.com/charliek/craze>
+- Docs: <https://charliek.github.io/craze/>
 
 ## Services & setup
 
