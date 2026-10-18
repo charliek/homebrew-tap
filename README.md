@@ -2,7 +2,8 @@
 
 Homebrew formulae for the CLIs and services I maintain — a git review TUI, a
 JVM code analyzer, microVM dev environments, a dev process manager,
-encrypted env-file tooling, and an ACP coding-agent TUI.
+encrypted env-file tooling, an ACP coding-agent TUI, and a CLI for
+publishing HTML pages to private links.
 
 ## Install
 
@@ -15,6 +16,7 @@ brew install shed-host-agent
 brew install prox
 brew install envsecrets
 brew install craze
+brew install parcel
 ```
 
 ## Formulae
@@ -28,6 +30,7 @@ brew install craze
 | `prox` | Modern process manager for development with API-first design |
 | `envsecrets` | CLI for managing encrypted environment files via GCS and age encryption |
 | `craze` | Terminal UI for Cursor and Grok coding agents over ACP |
+| `parcel` | Publish HTML pages to private, sandboxed Parcel URLs from the command line |
 
 ## Usage
 
@@ -166,6 +169,23 @@ craze --help             # all options
 
 - Repo: <https://github.com/charliek/craze>
 - Docs: <https://charliek.github.io/craze/>
+
+### parcel
+
+The CLI for [Parcel](https://parcel.stridelabs.ai): publish an HTML page (or a
+folder of them) to a private, sandboxed link, revise it, share it by email,
+and work through the comments people leave on it. Coding agents use it too;
+`parcel skill install` adds its agent skill.
+
+```bash
+parcel login                         # browser sign-in (device flow)
+parcel publish report.html           # → https://parcel.stridelabs.ai/p/<id>
+parcel publish ./site --parcel <id>  # a new version at the same link
+parcel comments list <id>            # feedback left in the viewer
+parcel --help                        # every command
+```
+
+- Repo: <https://github.com/charliek/parcel>
 
 ## Services & setup
 
