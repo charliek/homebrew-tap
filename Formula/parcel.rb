@@ -6,21 +6,21 @@
 class Parcel < Formula
   desc "Publish HTML pages to private, sandboxed Parcel URLs from the command line"
   homepage "https://github.com/charliek/parcel"
-  version "0.2.0"
+  version "0.2.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/parcel/releases/download/v0.2.0/parcel_darwin_amd64.tar.gz"
-      sha256 "90907a77219f7ab52341c851086b4e5261715d7787bf089ed435b9b213835a3c"
+      url "https://github.com/charliek/parcel/releases/download/v0.2.1/parcel_darwin_amd64.tar.gz"
+      sha256 "3ce518442b9eed04106a1342eea68fb57138b1bec87629c192bd810b731770e2"
 
       define_method(:install) do
         bin.install "parcel"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/parcel/releases/download/v0.2.0/parcel_darwin_arm64.tar.gz"
-      sha256 "614dde741cb79effc6e8aead617bd80c678bf07d1ade211f21b78b64bbd276a6"
+      url "https://github.com/charliek/parcel/releases/download/v0.2.1/parcel_darwin_arm64.tar.gz"
+      sha256 "717a2e0d130227202863a67bad061965a1a6dc43e0ba44d69434d714b1cef09b"
 
       define_method(:install) do
         bin.install "parcel"
@@ -30,16 +30,16 @@ class Parcel < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/parcel/releases/download/v0.2.0/parcel_linux_amd64.tar.gz"
-      sha256 "6e96869677e3dec688041b1bbcc0d21cfbb57dc94d7a235897c6152b6cdb4084"
+      url "https://github.com/charliek/parcel/releases/download/v0.2.1/parcel_linux_amd64.tar.gz"
+      sha256 "756782128efa55754336e3f66bf499b912616ec5599399ddff5224936da3c9e4"
 
       define_method(:install) do
         bin.install "parcel"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/parcel/releases/download/v0.2.0/parcel_linux_arm64.tar.gz"
-      sha256 "8a05fbe5145e4b833ec8a6a026f708ac6cb4afb431cc14d769cf5c2a3fc8e265"
+      url "https://github.com/charliek/parcel/releases/download/v0.2.1/parcel_linux_arm64.tar.gz"
+      sha256 "02e3f25e4053c94ccfdebb42213c81b7d1b47d23188665bde1c494148ef29011"
 
       define_method(:install) do
         bin.install "parcel"
