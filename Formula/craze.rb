@@ -5,21 +5,21 @@
 class Craze < Formula
   desc "Terminal UI for coding agents: cursor-agent, grok, gx, or a built-in agent"
   homepage "https://github.com/charliek/craze"
-  version "0.2.0"
+  version "0.3.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/craze/releases/download/v0.2.0/craze_darwin_amd64.tar.gz"
-      sha256 "23c9f78dd0535505275c2e0048f347e163dae661506e454aa00251358b395499"
+      url "https://github.com/charliek/craze/releases/download/v0.3.0/craze_darwin_amd64.tar.gz"
+      sha256 "63a4a6cad0d84f307e3293ded71c5983adc1d91874fd8ca627e1d814b801dbf7"
 
       define_method(:install) do
         bin.install "craze"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/craze/releases/download/v0.2.0/craze_darwin_arm64.tar.gz"
-      sha256 "1faa6e6ef05ac5019874a8a325bc3387192ceb8fad3f992f83b64fa2847c8b7b"
+      url "https://github.com/charliek/craze/releases/download/v0.3.0/craze_darwin_arm64.tar.gz"
+      sha256 "058214dafef99278cf4628dd5bfbfff63f8cbc629a49b56ffb990b1186ccb838"
 
       define_method(:install) do
         bin.install "craze"
@@ -29,15 +29,15 @@ class Craze < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/craze/releases/download/v0.2.0/craze_linux_amd64.tar.gz"
-      sha256 "aabdd601a1c65d921082d8f160e408469102e01e80fb9b01402047538006df7c"
+      url "https://github.com/charliek/craze/releases/download/v0.3.0/craze_linux_amd64.tar.gz"
+      sha256 "bcf01f84f55668ce04a962b700574467118ea8f295ce52b15e0c0eafa9500ea5"
       define_method(:install) do
         bin.install "craze"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/craze/releases/download/v0.2.0/craze_linux_arm64.tar.gz"
-      sha256 "0a8002aa1a6867b92a89e8e65c328040d1970722212727371b68c348a2fdda47"
+      url "https://github.com/charliek/craze/releases/download/v0.3.0/craze_linux_arm64.tar.gz"
+      sha256 "ac38d6e4ef56dd55214e0a0c059d37a7ba64e5a2b565c55027752d7042a3b658"
       define_method(:install) do
         bin.install "craze"
       end
