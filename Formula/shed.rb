@@ -5,19 +5,29 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.9.0"
+  version "0.10.1"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.9.0/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "678789dfa8dcf21f7635b4ef3b917c0638c48dbe9a4d7bab1bf93ccd8965aebb"
+      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "ef28c9811b2c116a9ff755034f78da009d4e2f12a0a5b676e87845ecf2c9d6cd"
 
       define_method(:install) do
         bin.install "shed"
-        bin.install "shed-server"
+        if OS.mac?
+          # shed-server ships inside ShedServer.app (plan 028, #304): macOS keys
+          # an external drive's permission on the bundle's ID and signature,
+          # which survive upgrades, but a bare binary's on its Cellar path, which
+          # doesn't. bin/shed-server links into the bundle, so the service
+          # command is unchanged. The archive's raw shed-server isn't installed.
+          libexec.install "ShedServer.app"
+          bin.install_symlink libexec/"ShedServer.app/Contents/MacOS/shed-server"
+        else
+          bin.install "shed-server"
+        end
         bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
@@ -32,17 +42,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -70,9 +79,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -109,17 +117,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -139,9 +146,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -173,12 +179,22 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.9.0/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "5898fe7e02fb2041aae8829d7a7512ac4d00a1b9902bbac4247685714ec64684"
+      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "ea8fdaa65e931e558fa5868e2759d95ada4d50f2ccd67e64ec236f2695899ea7"
 
       define_method(:install) do
         bin.install "shed"
-        bin.install "shed-server"
+        if OS.mac?
+          # shed-server ships inside ShedServer.app (plan 028, #304): macOS keys
+          # an external drive's permission on the bundle's ID and signature,
+          # which survive upgrades, but a bare binary's on its Cellar path, which
+          # doesn't. bin/shed-server links into the bundle, so the service
+          # command is unchanged. The archive's raw shed-server isn't installed.
+          libexec.install "ShedServer.app"
+          bin.install_symlink libexec/"ShedServer.app/Contents/MacOS/shed-server"
+        else
+          bin.install "shed-server"
+        end
         bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
@@ -193,17 +209,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -231,9 +246,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -270,17 +284,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -300,9 +313,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -337,11 +349,21 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.9.0/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "1c6fb991d10959176ebb087dcff73c5db07e005822947950b4b6e0266ea552f9"
+      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "01d4f3cac61e5e52047a487aa1b671c828a92796291421933025b6e767d6ed20"
       define_method(:install) do
         bin.install "shed"
-        bin.install "shed-server"
+        if OS.mac?
+          # shed-server ships inside ShedServer.app (plan 028, #304): macOS keys
+          # an external drive's permission on the bundle's ID and signature,
+          # which survive upgrades, but a bare binary's on its Cellar path, which
+          # doesn't. bin/shed-server links into the bundle, so the service
+          # command is unchanged. The archive's raw shed-server isn't installed.
+          libexec.install "ShedServer.app"
+          bin.install_symlink libexec/"ShedServer.app/Contents/MacOS/shed-server"
+        else
+          bin.install "shed-server"
+        end
         bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
@@ -356,17 +378,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -394,9 +415,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -433,17 +453,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -463,9 +482,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -497,11 +515,21 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.9.0/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "f1cbef5a83b01f90fc17a297c2a72c03176d3b8bdb0afbb6e09d811c154af194"
+      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "bea2bfc6e40e2522aebbbb784c59c8e553625f61214f94c747a3be3781152a96"
       define_method(:install) do
         bin.install "shed"
-        bin.install "shed-server"
+        if OS.mac?
+          # shed-server ships inside ShedServer.app (plan 028, #304): macOS keys
+          # an external drive's permission on the bundle's ID and signature,
+          # which survive upgrades, but a bare binary's on its Cellar path, which
+          # doesn't. bin/shed-server links into the bundle, so the service
+          # command is unchanged. The archive's raw shed-server isn't installed.
+          libexec.install "ShedServer.app"
+          bin.install_symlink libexec/"ShedServer.app/Contents/MacOS/shed-server"
+        else
+          bin.install "shed-server"
+        end
         bin.install "shed-egress-proxy"
         (etc/"shed").mkpath
         unless (etc/"shed/server.yaml").exist?
@@ -516,17 +544,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: vz
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -554,9 +581,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -593,17 +619,16 @@ class Shed < Formula
               ssh_port: 2222
 
               # bind_address: which interface every listener (HTTP/SSH) uses.
-              # Default loopback (127.0.0.1) = reachable on this machine only. To
-              # reach it from other hosts, prefer secure mode (auth.mode: secure;
-              # see the reference above) with bind_address: 0.0.0.0; or, for an
-              # OPEN server on a trusted private network, set bind_address: 0.0.0.0
-              # and allow_insecure_exposure: true.
+              # Default loopback (127.0.0.1) = reachable on this machine only.
+              # This config runs open mode, which is loopback only. To reach the
+              # server from other hosts, set auth.mode: mtls with an SSH key
+              # source and bind_address: 0.0.0.0 (see the reference above).
               bind_address: 127.0.0.1
 
               default_backend: firecracker
               log_level: info
 
-              # Host directories to mount into every shed (formerly "credentials")
+              # Host directories to mount into every shed
               # Using ~/.shed/mounts/ keeps host and VM configs separate.
               # mounts:
               #   claude:
@@ -623,9 +648,8 @@ class Shed < Formula
               # env_file: ~/.shed/env
 
               # Extensions provide credential brokering from host to VM.
-              # Requires shed-host-agent to be installed and running:
-              #   brew install shed-host-agent
-              #   brew services start shed-host-agent
+              # The shed desktop app brokers credentials (install it from the
+              # release page).
               # extensions:
               #   enabled:
               #     - ssh-agent
@@ -658,28 +682,6 @@ class Shed < Formula
     end
   end
 
-  def post_install
-    if OS.mac?
-      require "tempfile"
-      tmp = Tempfile.new(["shed-entitlements", ".plist"])
-      tmp.write <<~XML
-        <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-        <plist version="1.0">
-        <dict>
-          <key>com.apple.security.virtualization</key>
-          <true/>
-        </dict>
-        </plist>
-      XML
-      tmp.flush
-      system "codesign", "--force", "--sign", "-",
-             "--entitlements", tmp.path,
-             "#{bin}/shed-server"
-      tmp.close!
-    end
-  end
-
   def caveats
     <<~EOS
       The shed-server config has been installed to:
@@ -689,15 +691,21 @@ class Shed < Formula
       then start shed-server as a background service:
         brew services start shed
 
-      By default shed-server listens on 127.0.0.1 only (the local-development
-      default). To reach it from other machines set bind_address in the config —
-      prefer auth.mode: secure for anything exposed on a network.
+      By default shed-server listens on 127.0.0.1 only, in open mode (the
+      local-development default; open mode is loopback only). To reach it from
+      other machines set auth.mode: mtls with an SSH key source and
+      bind_address in the config. auth.mode: token and secure, and
+      allow_insecure_exposure, were removed in v0.10.0 and fail to load.
 
       To enable extensions (SSH agent forwarding, AWS credentials,
-      Docker credentials), also install the host agent:
-        brew install shed-host-agent
+      Docker credentials), the shed desktop app brokers credentials
+      (install it from the release page).
 
       Logs: #{var}/log/shed-server.log
+
+      With the VZ store on an external drive, macOS asks once for access the
+      first time ShedServer.app starts. Allow it on the Mac's screen, or grant
+      Full Disk Access to #{opt_libexec}/ShedServer.app
 
       Note: shed-server requires Docker for VM image management.
     EOS
@@ -706,6 +714,7 @@ class Shed < Formula
   service do
     run [opt_bin/"shed-server", "serve", "--config", etc/"shed/server.yaml"]
     keep_alive true
+    stop_timeout 35
     log_path var/"log/shed-server.log"
     error_log_path var/"log/shed-server.log"
     environment_variables PATH: "/usr/local/bin:#{std_service_path_env}"
