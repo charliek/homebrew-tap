@@ -5,15 +5,15 @@
 class Shed < Formula
   desc "CLI and server for managing persistent VM-based dev environments"
   homepage "https://github.com/charliek/shed"
-  version "0.10.1"
+  version "0.11.0"
   license "MIT"
 
   depends_on "vfkit" if OS.mac?
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_darwin_amd64.tar.gz"
-      sha256 "ef28c9811b2c116a9ff755034f78da009d4e2f12a0a5b676e87845ecf2c9d6cd"
+      url "https://github.com/charliek/shed/releases/download/v0.11.0/shed-homebrew_darwin_amd64.tar.gz"
+      sha256 "c61990440708f71508229784cd608411c7cc2083a1ce21714138d15dd885d2c9"
 
       define_method(:install) do
         bin.install "shed"
@@ -78,21 +78,18 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               vz:
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-vz-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-vz-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: ~/Library/Application Support/shed/vz/instances
@@ -145,19 +142,16 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-fc-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-fc-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: /var/lib/shed/firecracker/instances
@@ -179,8 +173,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_darwin_arm64.tar.gz"
-      sha256 "ea8fdaa65e931e558fa5868e2759d95ada4d50f2ccd67e64ec236f2695899ea7"
+      url "https://github.com/charliek/shed/releases/download/v0.11.0/shed-homebrew_darwin_arm64.tar.gz"
+      sha256 "34d3056998f35a8a73550ed0030b5614ed0cd0936a334a17496b4e91ca8723ea"
 
       define_method(:install) do
         bin.install "shed"
@@ -245,21 +239,18 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               vz:
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-vz-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-vz-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: ~/Library/Application Support/shed/vz/instances
@@ -312,19 +303,16 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-fc-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-fc-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: /var/lib/shed/firecracker/instances
@@ -349,8 +337,8 @@ class Shed < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_linux_amd64.tar.gz"
-      sha256 "01d4f3cac61e5e52047a487aa1b671c828a92796291421933025b6e767d6ed20"
+      url "https://github.com/charliek/shed/releases/download/v0.11.0/shed-homebrew_linux_amd64.tar.gz"
+      sha256 "bd680df43d62daecfab6e0242508c6c002d4f791b3b549fe167b14bbb5548a0a"
       define_method(:install) do
         bin.install "shed"
         if OS.mac?
@@ -414,21 +402,18 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               vz:
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-vz-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-vz-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: ~/Library/Application Support/shed/vz/instances
@@ -481,19 +466,16 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-fc-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-fc-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: /var/lib/shed/firecracker/instances
@@ -515,8 +497,8 @@ class Shed < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/charliek/shed/releases/download/v0.10.1/shed-homebrew_linux_arm64.tar.gz"
-      sha256 "bea2bfc6e40e2522aebbbb784c59c8e553625f61214f94c747a3be3781152a96"
+      url "https://github.com/charliek/shed/releases/download/v0.11.0/shed-homebrew_linux_arm64.tar.gz"
+      sha256 "94b77ecd9bebdf2f345c788f4aab080bb5bb1e1b4c4780d8ed27687b067a9d0a"
       define_method(:install) do
         bin.install "shed"
         if OS.mac?
@@ -580,21 +562,18 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               vz:
                 vfkit_path: vfkit
                 kernel_path: ~/Library/Application Support/shed/vz/vmlinux
                 initrd_path: ~/Library/Application Support/shed/vz/initrd.img
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-vz-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-vz-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: ~/Library/Application Support/shed/vz/instances
@@ -647,19 +626,16 @@ class Shed < Formula
               # Environment file (KEY=value per line, injected into VMs)
               # env_file: ~/.shed/env
 
-              # Extensions provide credential brokering from host to VM.
-              # The shed desktop app brokers credentials (install it from the
-              # release page).
+              # Extensions to enable in VMs: each name matches a manifest in
+              # the image's /etc/shed-extensions.d/.
               # extensions:
               #   enabled:
-              #     - ssh-agent
-              #     - aws-credentials
-              #     - docker-credentials
+              #     - my-extension
 
               firecracker:
                 kernel_path: /var/lib/shed/firecracker/images/vmlinux
                 # default_image / image_aliases resolve from the server version
-                # when unset: ghcr.io/charliek/shed-fc-{base,extensions,full}:vX.Y.Z.
+                # when unset: ghcr.io/charliek/shed-fc-{base,full}:vX.Y.Z.
                 # Pin explicitly to override the registry or variant.
                 pull_policy: missing
                 instance_dir: /var/lib/shed/firecracker/instances
@@ -687,8 +663,8 @@ class Shed < Formula
       The shed-server config has been installed to:
         #{HOMEBREW_PREFIX}/etc/shed/server.yaml
 
-      Edit the config to enable credential mounts and extensions,
-      then start shed-server as a background service:
+      Edit the config to set credential mounts, then start shed-server
+      as a background service:
         brew services start shed
 
       By default shed-server listens on 127.0.0.1 only, in open mode (the
@@ -697,9 +673,8 @@ class Shed < Formula
       bind_address in the config. auth.mode: token and secure, and
       allow_insecure_exposure, were removed in v0.10.0 and fail to load.
 
-      To enable extensions (SSH agent forwarding, AWS credentials,
-      Docker credentials), the shed desktop app brokers credentials
-      (install it from the release page).
+      The shed desktop app delivers credentials into a shed when it is
+      created (install it from the release page).
 
       Logs: #{var}/log/shed-server.log
 
